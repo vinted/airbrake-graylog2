@@ -35,6 +35,36 @@ module Airbrake
         message << "-------------------------------\n\n"
         message << notice.backtrace.lines.join("\n")
 
+        if notice.url ||
+            notice.controller ||
+            notice.action ||
+            !notice.parameters.blank? ||
+            !notice.cgi_data.blank? ||
+            !notice.session_data.blank?
+
+          message << "\n"
+          message << "-------------------------------\n"
+          message << "Request:\n"
+          message << "-------------------------------\n\n"
+
+          message << "Url: " + notice.request.url.to_s + "\n"
+          message << "Controller: " + notice.request.controller.to_s + "\n"
+          message << "Action: " + notice.request.action.to_s + "\n"
+
+          unless notice.parameters.nil? || notice.parameters.empty?
+            message << "Parameters: " + notice.parameters.to_s + "\n"
+          end
+
+          unless notice.session_data.nil? || notice.session_data.empty?
+            message << "Session: " + notice.session_data.to_s + "\n"
+          end
+
+          unless notice.cgi_data.nil? || notice.cgi_data.empty?
+            message << "CGI data: " + notice.cgi_data.to_s + "\n"
+          end
+
+        end
+
         message << "\n"
         message << "-------------------------------\n"
         message << "Server environment:\n"
@@ -42,6 +72,7 @@ module Airbrake
         message << "Project root: " + notice.project_root.to_s + "\n"
         message << "Environment name: " + notice.environment_name.to_s + "\n"
         message << "Hostname: " + notice.hostname.to_s + "\n"
+        message << "Process: " + $$.to_s + "\n"
 
       end
 
