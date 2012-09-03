@@ -1,6 +1,6 @@
 # Airbrake::Graylog2
 
-TODO: Write a gem description
+Extend airbrake gem to allow sending exceptions to Graylog2 server.
 
 ## Installation
 
@@ -18,7 +18,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    Airbrake.configure do |config|
+      config.host = "localhost"
+      config.port = 12201
+
+      config.graylog2_facility = "my-custom-facility"
+
+      config.graylog2_extra_args[:sample1] = "Test"
+    end
 
 ## Contributing
 
