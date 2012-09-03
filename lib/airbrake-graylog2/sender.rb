@@ -27,7 +27,7 @@ module Airbrake
         message << "-------------------------------\n"
         message << "Error details:\n"
         message << "-------------------------------\n\n"
-        message << "Error class: " + notice.error_class + "\n"
+        message << "Error class: " + notice.error_class.to_s + "\n"
 
         message << "\n"
         message << "-------------------------------\n"
@@ -47,9 +47,9 @@ module Airbrake
           message << "Request:\n"
           message << "-------------------------------\n\n"
 
-          message << "Url: " + notice.request.url.to_s + "\n"
-          message << "Controller: " + notice.request.controller.to_s + "\n"
-          message << "Action: " + notice.request.action.to_s + "\n"
+          message << "Url: " + notice.url.to_s + "\n"
+          message << "Controller: " + notice.controller.to_s + "\n"
+          message << "Action: " + notice.action.to_s + "\n"
 
           unless notice.parameters.nil? || notice.parameters.empty?
             message << "Parameters: " + notice.parameters.to_s + "\n"

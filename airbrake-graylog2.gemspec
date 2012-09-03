@@ -4,8 +4,8 @@ require File.expand_path('../lib/airbrake-graylog2/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Laurynas Butkus"]
   gem.email         = ["laurynas.butkus@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Send Airbrake exceptions to Graylog2}
+  gem.summary       = %q{Send Airbrake exceptions to Graylog2}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
