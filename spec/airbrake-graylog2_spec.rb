@@ -10,6 +10,7 @@ describe Airbrake do
       subject.configuration.port.should                 == 12201
       subject.configuration.graylog2_facility.should    == 'airbrake_graylog2'
       subject.configuration.graylog2_max_size.should    == 'WAN'
+      subject.configuration.graylog2_extra_args.should  == {}
     end
 
     it "should allow configuring" do
@@ -26,7 +27,6 @@ describe Airbrake do
     it "should send notification to Graylog2" do
       subject.notify(Exception.new("Test exception"))
     end
-
 
   end
 

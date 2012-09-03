@@ -17,6 +17,14 @@ module Airbrake
           :full_message => convert_airbrake_notice_to_text(notice)
         }
 
+        extra_args = @configuration.graylog2_extra_args.merge({
+          :environment => notice.environment_name
+        })
+
+        extra_args.each do |name, value|
+          args["_#{name}"] = value unless value.nil?
+        end
+
         @notifier.notify!(args)
       end
 
@@ -24,10 +32,11 @@ module Airbrake
 
       def convert_airbrake_notice_to_text(notice)
         message = ""
-        message << "-------------------------------\n"
-        message << "Error details:\n"
-        message << "-------------------------------\n\n"
         message << "Error class: " + notice.error_class.to_s + "\n"
+        message << "Project root: " + notice.project_root.to_s + "\n"
+        message << "Environment name: " + notice.environment_name.to_s + "\n"
+        message << "Hostname: " + notice.hostname.to_s + "\n"
+        message << "Process: " + $$.to_s + "\n"
 
         message << "\n"
         message << "-------------------------------\n"
@@ -42,38 +51,37 @@ module Airbrake
             !notice.cgi_data.blank? ||
             !notice.session_data.blank?
 
-          message << "\n"
+          message << "\n\n"
           message << "-------------------------------\n"
           message << "Request:\n"
-          message << "-------------------------------\n\n"
-
+          message << "-------------------------------\n"
+          message << "\n"
           message << "Url: " + notice.url.to_s + "\n"
           message << "Controller: " + notice.controller.to_s + "\n"
           message << "Action: " + notice.action.to_s + "\n"
 
           unless notice.parameters.nil? || notice.parameters.empty?
-            message << "Parameters: " + notice.parameters.to_s + "\n"
+            message << "\n"
+            message << "Parameters:\n\n" + notice.parameters.to_s + "\n"
           end
 
           unless notice.session_data.nil? || notice.session_data.empty?
-            message << "Session: " + notice.session_data.to_s + "\n"
+            message << "\n"
+            message << "Session:\n\n" + notice.session_data.to_s + "\n"
           end
 
           unless notice.cgi_data.nil? || notice.cgi_data.empty?
-            message << "CGI data: " + notice.cgi_data.to_s + "\n"
+            message << "\n"
+            message << "CGI data:\n\n"
+
+            notice.cgi_data.each do |key, val|
+              message << "#{key} => #{val}\n"
+            end
           end
 
         end
 
-        message << "\n"
-        message << "-------------------------------\n"
-        message << "Server environment:\n"
-        message << "-------------------------------\n\n"
-        message << "Project root: " + notice.project_root.to_s + "\n"
-        message << "Environment name: " + notice.environment_name.to_s + "\n"
-        message << "Hostname: " + notice.hostname.to_s + "\n"
-        message << "Process: " + $$.to_s + "\n"
-
+        message
       end
 
     end
