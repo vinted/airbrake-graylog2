@@ -1,5 +1,7 @@
 # Airbrake::Graylog2
 
+[![Build Status](https://secure.travis-ci.org/friendlyfashion/airbrake-graylog2.png)](http://travis-ci.org/friendlyfashion/airbrake-graylog2)
+
 Extend airbrake gem to allow sending exceptions to Graylog2 server.
 
 ## Installation
