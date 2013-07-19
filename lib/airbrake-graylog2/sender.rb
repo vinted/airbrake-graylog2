@@ -14,7 +14,8 @@ module Airbrake
       def send_to_graylog2(notice)
         args = {
           :short_message => notice.error_message,
-          :full_message => convert_airbrake_notice_to_text(notice)
+          :full_message => convert_airbrake_notice_to_text(notice),
+          :level => @configuration.graylog2_level
         }
 
         extra_args = @configuration.graylog2_extra_args.merge({
