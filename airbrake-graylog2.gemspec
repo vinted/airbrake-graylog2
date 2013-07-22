@@ -2,8 +2,8 @@
 require File.expand_path('../lib/airbrake-graylog2/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Laurynas Butkus", "Tomas Didziokas", "Justas Janauskas", "Edvinas Bartkus"]
-  gem.email         = ["laurynas.butkus@gmail.com", "tomas.did@gmail.com", "jjanauskas@gmail.com", "edvinas.bartkus@gmail.com"]
+  gem.authors       = ["Laurynas Butkus", "Tomas Didziokas", "Justas Janauskas", "Edvinas Bartkus", "Tomas Varaneckas"]
+  gem.email         = ["laurynas.butkus@gmail.com", "tomas.did@gmail.com", "jjanauskas@gmail.com", "edvinas.bartkus@gmail.com", "tomas.varaneckas@gmail.com"]
 
   gem.description   = %q{Send Airbrake exceptions to Graylog2}
   gem.summary       = %q{Send Airbrake exceptions to Graylog2}
