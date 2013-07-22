@@ -8,6 +8,7 @@ describe Airbrake do
     it "should have default configuration values" do
       subject.configuration.host.should                 == 'localhost'
       subject.configuration.port.should                 == 12201
+      subject.configuration.graylog2_level.should       == GELF::Levels::ERROR
       subject.configuration.graylog2_facility.should    == 'airbrake_graylog2'
       subject.configuration.graylog2_max_size.should    == 'WAN'
       subject.configuration.graylog2_extra_args.should  == {}
@@ -16,9 +17,11 @@ describe Airbrake do
     it "should allow configuring" do
       subject.configure do |config|
         config.graylog2_facility = "test-notifier"
+        config.graylog2_level = GELF::Levels::WARN
       end
 
       subject.configuration.graylog2_facility.should == "test-notifier"
+      subject.configuration.graylog2_level.should    == GELF::Levels::WARN
     end
   end
 
