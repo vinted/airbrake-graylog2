@@ -1,4 +1,5 @@
 require 'gelf'
+require 'active_support/core_ext/object/blank'
 
 module Airbrake
   module Graylog2

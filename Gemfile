@@ -4,11 +4,9 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'rake'
-gem 'gelf', '~> 1.3'
-gem 'airbrake', '~> 3.1'
 
 group :test do
-  gem "rspec"
+  gem "rspec", '~> 2.14.1'
 end
 
 group :test, :development do

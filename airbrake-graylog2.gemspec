@@ -18,4 +18,5 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency "gelf", '~> 1.3'
   gem.add_runtime_dependency "airbrake", '~> 3.1'
+  gem.add_runtime_dependency 'activesupport', '> 2.3.8'
 end
