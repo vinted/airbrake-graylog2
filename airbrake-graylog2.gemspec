@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
 
   gem.description   = %q{Send Airbrake exceptions to Graylog2}
   gem.summary       = %q{Send Airbrake exceptions to Graylog2}
-  gem.homepage      = "https://github.com/friendlyfashion/airbrake-graylog2"
+  gem.homepage      = 'https://github.com/vinted/airbrake-graylog2'
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
