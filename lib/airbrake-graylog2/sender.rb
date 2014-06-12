@@ -44,7 +44,7 @@ module Airbrake
         message << "-------------------------------\n"
         message << "Backtrace:\n"
         message << "-------------------------------\n\n"
-        message << notice.backtrace.lines.join("\n")
+        message << cleanup_backtrace(notice.exception).join("\n")
 
         if notice.url ||
             notice.controller ||
@@ -86,6 +86,12 @@ module Airbrake
         message
       end
 
+      def cleanup_backtrace(exception)
+        trace = exception && exception.backtrace ? exception.backtrace : caller
+        return trace unless defined?(::Rails) && defined?(::Rails.backtrace_cleaner)
+
+        ::Rails.backtrace_cleaner.clean(trace)
+      end
     end
   end
 end
