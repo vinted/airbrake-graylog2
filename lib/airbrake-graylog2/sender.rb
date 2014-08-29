@@ -20,7 +20,8 @@ module Airbrake
         }
 
         extra_args = @configuration.graylog2_extra_args.merge({
-          :environment => notice.environment_name
+          :environment => notice.environment_name,
+          :pid => Process.pid
         })
 
         extra_args.each do |name, value|
